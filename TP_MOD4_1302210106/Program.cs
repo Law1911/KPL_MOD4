@@ -12,6 +12,12 @@ namespace TP_MOD4_KPL
             table_kode_pos.getkodepos(kota);
 
             Console.WriteLine("");
+
+            Console.WriteLine("Door Status");
+
+            DoorMachine door = new DoorMachine();
+
+            door.key();
         }
     }
     class KodePos
@@ -38,9 +44,45 @@ namespace TP_MOD4_KPL
             }
             else
             {
-                Console.WriteLine(kode + "Kode tidak terdaftar");
+                Console.WriteLine(kode + " Kode tidak terdaftar");
             }
         }
     }
+    class DoorMachine
+    {
+        enum State { Terkunci, Terbuka, Exit };
+
+        public void key()
+        {
+            State state = State.Terkunci;
+
+            String[] door_status = { "Terkunci", "Terbuka", "Keluar" };
+            do
+            {
+                Console.WriteLine("Pintu " + door_status[(int)state]);
+                Console.Write("Keyword : ");
+                String command = Console.ReadLine();
+                switch (state)
+                {
+                    case State.Terkunci:
+                        if (command == "Buka Pintu")
+                        {
+                            state = State.Terbuka;
+                        }
+                        break;
+                    case State.Terbuka:
+
+                        if (command == "Kunci Pintu")
+                        {
+                            state = State.Terkunci;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            } while (true);
+        }
+    }
+
 }
     
